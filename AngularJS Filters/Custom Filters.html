@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<body>
+
+<ul ng-app="myApp" ng-controller="nameCtrl">
+    <li ng-repeat="x in names">
+        {{x.name | myFormat}}
+    </li>
+</ul>
+    <script>
+        var app = angular.module("myApp", []);
+            app.controller("nameCtrl", function ($scope) {
+                $scope.names = [
+                    { name: 'Jani', country: 'Norway' },
+                    { name: 'Carl', country: 'Sweden' },
+                    { name: 'Margareth', country: 'England' },
+                    { name: 'Hege', country: 'Norway' },
+                    { name: 'Joe', country: 'Denmark' },
+                    { name: 'Gustav', country: 'Sweden' },
+                    { name: 'Birgit', country: 'Denmark' },
+                    { name: 'Mary', country: 'England' },
+                    { name: 'Kai', country: 'Norway' }
+                ];
+            });
+            app.filter("myFormat",function(){
+                return function(x){
+                    var i, c, txt = "";
+                    for(i=0;i<x.length;i++){
+                        c = x[i];
+                        if(i%2==0){
+                            c = c.toUpperCase();
+                        }
+                        txt += c;
+                    }
+                    return txt;
+                };
+            });
+    </script>
+
+</body>
+
+</html>
